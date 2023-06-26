@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Window</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .text{
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 10%;
+        }
+        .myButton{
+            all: unset;
+            cursor: pointer;
+            color: white;
+            padding: 5px 10px;
+            border: solid 1px transparent;
+            border-radius: 50px;
+            background-color: darkorchid;
+            margin-left: 50%;
+            transform: translateX(-50%);
+            transition: color .4s, background-color .4s, border-color .4s, padding .4s;
+        }
+        .myButton:hover{
+            background-color: transparent;
+            color:darkorchid;
+            border-color: darkorchid;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur esse consectetur nesciunt amet ut, explicabo sapiente maxime dignissimos velit rem? Doloremque vel illo ut ad sapiente doloribus error voluptate commodi?</div>
+    <button class="myButton">Открыть</button>
+    <script>
+        const myButton = document.querySelector('.myButton');
+        const body = document.querySelector('body');
+
+        myButton.addEventListener('click', function(){
+            const newWindow = document.createElement('div');
+            newWindow.classList.add('newWindow');
+            newWindow.style.background = "rgba(238, 130, 238, 0.75)";
+            newWindow.style.position = "absolute";
+            newWindow.style.top = "0";
+            newWindow.style.width = "100vw";
+            newWindow.style.height = "100vh";
+            body.appendChild(newWindow);
+            newWindow.addEventListener('click', function(){
+                body.removeChild(newWindow);
+                body.removeChild(modalWindow);
+            })
+
+            const modalWindow = document.createElement('div');
+            modalWindow.classList.add('modalWindow');
+            modalWindow.textContent = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur esse consectetur nesciunt amet ut, explicabo sapiente maxime dignissimos velit rem? Doloremque vel illo ut ad sapiente doloribus error voluptate commodi?";
+            modalWindow.style.position = "relative";
+            modalWindow.style.width = "80%"
+            modalWindow.style.margin = "20px auto"
+            modalWindow.style.padding = "40px 20px";
+            modalWindow.style.textAlign = "center";
+            modalWindow.style.background = "white";
+            modalWindow.style.borderRadius = "10000px";
+            body.appendChild(modalWindow);
+
+
+
+            const closeButton = document.createElement('button');
+            closeButton.classList.add('closeButton');
+            closeButton.style.all = "unset";
+            closeButton.style.cursor = "pointer";
+            closeButton.textContent = "x";
+            closeButton.style.textAlign = "center";
+            closeButton.lineHeight = "20px"
+            closeButton.style.position = "absolute";
+            closeButton.style.right = "30px";
+            closeButton.style.top = "-10px";
+            closeButton.style.width = "30px";
+            closeButton.style.height = "30px";
+            closeButton.style.background = "red";
+            closeButton.style.border = "solid 1px red"
+            closeButton.style.borderRadius = "50%";
+            closeButton.style.color = "white";
+            closeButton.addEventListener('click', function(){
+                body.removeChild(newWindow);
+                body.removeChild(modalWindow);
+            })
+            modalWindow.appendChild(closeButton);
+        })
+    </script>
+</body>
+</html>
